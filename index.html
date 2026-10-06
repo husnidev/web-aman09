@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Web tentang album atau galeri dari alumni madrasah aliyah negri 2 brebes angkatan 2009">
+  <meta name="keywords" content="album, galeri alumni madrasah aliyah negeri 2 brebes">
+  <title>Web Alumni MA Negeri 2 Brebes Angkatan 2009</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+  </style>
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <div class="mx-auto p-4 text-center" id="home">
+    <div class="flex flex-col items-center justify-center rounded-lg p-6 bg-current shadow-md opacity-75">
+      <div class="ornamen">
+        <div class="stright-line"></div>
+      </div>
+      <h1 class="text-title">Selamat Datang di Web Alumni MA Negeri 2 Brebes Angkatan 2009</h1>
+      <p class="text-description">Ini adalah web tentang album atau galeri dari alumni madrasah aliyah negeri 2 brebes angkatan 2009.</p>
+      <button class="mt-4 animate-bounce" id="view-album">Lihat Album <i class="fa-solid fa-arrow-down"></i></button>
+        <div class="ornamen">
+          <div class="curved-line active"></div>
+          <div class="curved-line"></div>
+          <div class="curved-line"></div>
+          <div class="curved-line"></div>
+          <div class="curved-line"></div>
+        </div>
+    </div>
+  </div>
+  <div class="album-section hidden" id="album">
+    <div class="album-inner">
+      <h2 class="text-center font-bold">Album</h2>
+      <p class="text-gray-600 text-center">Berikut adalah beberapa foto dari kegiatan alumni MA Negeri 2 Brebes angkatan 2009.</p>
+      <div
+        style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
+        class="swiper mySwiper2"
+      >
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="images/album/20260324101809_IMG_1269.webp" alt="Foto alumni 1" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/20260324102223_IMG_1273.webp" alt="Foto alumni 2" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/20260324102255_IMG_1274.webp" alt="Foto alumni 3" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/20260324102505_IMG_1279.webp" alt="Foto alumni 4" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/Satubidik_Reuni Man-84.webp" alt="Foto alumni 5" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/Satubidik_Reuni Man-170.webp" alt="Foto alumni 6" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/Satubidik_Reuni Man-242.webp" alt="Foto alumni 7" loading="lazy">
+          </div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+
+      <div thumbsSlider="" class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="images/album/20260324101809_IMG_1269.webp" alt="Thumbnail 1" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/20260324102223_IMG_1273.webp" alt="Thumbnail 2" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/20260324102255_IMG_1274.webp" alt="Thumbnail 3" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/20260324102505_IMG_1279.webp" alt="Thumbnail 4" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/Satubidik_Reuni Man-84.webp" alt="Thumbnail 5" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/Satubidik_Reuni Man-170.webp" alt="Thumbnail 6" loading="lazy">
+          </div>
+          <div class="swiper-slide">
+            <img src="images/album/Satubidik_Reuni Man-242.webp" alt="Thumbnail 7" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- posisi navbar dibawah seperti tampilan mobile -->
+  <div class="footer">
+    <nav class="fixed bottom-0 left-0 w-full bg-gray-800 text-white p-4">
+      <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse justify-center">
+<li><a href="#album" id="nav-album" class="transition duration-700 ease-in-out ..."><i class="fa-regular fa-images"></i>
+</a></li>
+        <li><a href="https://wa.me/6287884395611?text=Halo%20alumni!Apa%20kabar?.Apa%20yang%20bisa%20saya%20bantu?" class="transition duration-700 ease-in-out ..." target="_blank"><i class="fa-brands fa-whatsapp"></i></a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <script>
+    let currentYear = new Date().getFullYear();
+    let yearsSince2009 = currentYear - 2009;
+    document.querySelector('.text-description').textContent = `Ini adalah web tentang album atau galeri dari alumni madrasah aliyah negeri 2 brebes angkatan 2009. Sudah ${yearsSince2009} tahun berlalu sejak kelulusan kami.`;
+    let descriptionElement = document.querySelector('.text-description');
+    if (descriptionElement.textContent.length > 500) {
+      descriptionElement.textContent = descriptionElement.textContent.substring(0, 100) + '...';
+    }
+    let homeSection = document.getElementById('home');
+    let albumSection = document.getElementById('album');
+
+    // init: false -> swiper baru dihitung setelah section album tampil (ukurannya 0 saat masih hidden)
+    const thumbSwiper = new Swiper('.mySwiper', {
+      init: false,
+      spaceBetween: 8,
+      slidesPerView: 3,
+      freeMode: true,
+      watchSlidesProgress: true,
+      breakpoints: {
+        480: { slidesPerView: 4, spaceBetween: 10 },
+        768: { slidesPerView: 5, spaceBetween: 12 },
+        1024: { slidesPerView: 6, spaceBetween: 14 },
+      },
+    });
+
+    const mainSwiper = new Swiper('.mySwiper2', {
+      init: false,
+      spaceBetween: 8,
+      speed: 400,
+      grabCursor: true,
+      keyboard: { enabled: true },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      thumbs: {
+        swiper: thumbSwiper,
+      },
+      breakpoints: {
+        480: { spaceBetween: 10 },
+        768: { spaceBetween: 14 },
+      },
+    });
+
+    let galleryReady = false;
+
+    function initGallery() {
+      if (galleryReady) {
+        thumbSwiper.update();
+        mainSwiper.update();
+        return;
+      }
+      galleryReady = true;
+      thumbSwiper.init();
+      mainSwiper.init();
+    }
+
+    function showAlbum() {
+      homeSection.style.display = 'none';
+      albumSection.classList.remove('hidden');
+      initGallery();
+      albumSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.getElementById('view-album').addEventListener('click', function() {
+      // setelah tombol diklik buat agar class active pada garis lengkung pertama hilang dan pindah ke garis lengkung kedua
+      // setiap garis lengkung berikutnya akan muncul dengan jeda 1 detik
+      let curvedLines = document.querySelectorAll('.curved-line');
+      curvedLines[0].classList.add('active');
+      for (let i = 1; i < curvedLines.length; i++) {
+        setTimeout(function() {
+          curvedLines[i].classList.add('active');
+        }, i * 1000); // Tambahkan jeda 1 detik untuk setiap garis lengkung berikutnya
+      }
+
+      setTimeout(showAlbum, 5000); // Tunggu 5 detik sebelum menampilkan bagian album
+    });
+
+    // link navbar "album" langsung menampilkan section album + gallery
+    document.getElementById('nav-album').addEventListener('click', function(e) {
+      e.preventDefault();
+      showAlbum();
+    });
+
+    // perhitungan ulang ukuran slide saat layar dirotasi / diubah ukurannya
+    window.addEventListener('resize', function() {
+      if (!galleryReady) return;
+      thumbSwiper.update();
+      mainSwiper.update();
+    });
+  </script>
+</body>
+</html>
