@@ -7,6 +7,7 @@
   <meta name="description" content="Web tentang album atau galeri dari alumni madrasah aliyah negri 2 brebes angkatan 2009">
   <meta name="keywords" content="album, galeri alumni madrasah aliyah negeri 2 brebes">
   <title>Web Alumni MA Negeri 2 Brebes Angkatan 2009</title>
+  <link rel="icon" href="data:,">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"/>
@@ -38,6 +39,34 @@
     <div class="album-inner">
       <h2 class="text-center font-bold">Album</h2>
       <p class="text-gray-600 text-center">Berikut adalah beberapa foto dari kegiatan alumni MA Negeri 2 Brebes angkatan 2009.</p>
+
+      <!-- player musik memori sekolah -->
+      <div class="music-player" id="music-player">
+        <audio id="memori-audio" src="audio/Moavii - Prepare (freetouse.com).mp3" loop preload="metadata"></audio>
+        <button type="button" class="music-toggle" id="music-toggle" aria-label="Putar musik Memori Sekolah">
+          <i class="fa-solid fa-play" id="music-icon"></i>
+        </button>
+        <div class="music-body">
+          <p class="music-title">Memori Sekolah <span class="music-status" id="music-status">Kenangan MAN 2 Brebes Angkatan 2009</span></p>
+          <div class="music-progress" id="music-progress" role="slider" tabindex="0" aria-label="Posisi lagu" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="music-progress-bar" id="music-progress-bar"></div>
+          </div>
+          <div class="music-times">
+            <span id="music-current">0:00</span>
+            <span id="music-duration">0:00</span>
+          </div>
+        </div>
+        <div class="music-volume">
+          <button type="button" class="music-mute" id="music-mute" aria-label="Bisukan suara">
+            <i class="fa-solid fa-volume-high" id="music-volume-icon"></i>
+          </button>
+          <input type="range" id="music-volume-range" min="0" max="1" step="0.05" value="0.7" aria-label="Volume">
+        </div>
+        <button type="button" class="music-loop is-on" id="music-loop" aria-pressed="true" aria-label="Hentikan pengulangan lagu" title="Ulangi lagu">
+          <i class="fa-solid fa-repeat"></i>
+        </button>
+      </div>
+
       <div
         style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
         class="swiper mySwiper2"
@@ -153,6 +182,140 @@
 
     let galleryReady = false;
 
+    // ===== player musik memori sekolah =====
+    const audio = document.getElementById('memori-audio');
+    const musicToggle = document.getElementById('music-toggle');
+    const musicIcon = document.getElementById('music-icon');
+    const musicStatus = document.getElementById('music-status');
+    const musicProgress = document.getElementById('music-progress');
+    const musicBar = document.getElementById('music-progress-bar');
+    const musicCurrent = document.getElementById('music-current');
+    const musicDuration = document.getElementById('music-duration');
+    const musicMute = document.getElementById('music-mute');
+    const musicVolumeIcon = document.getElementById('music-volume-icon');
+    const musicVolume = document.getElementById('music-volume-range');
+    const musicLoop = document.getElementById('music-loop');
+
+    const DEFAULT_STATUS = 'Kenangan MAN 2 Brebes Angkatan 2009';
+    audio.volume = parseFloat(musicVolume.value);
+
+    function formatTime(t) {
+      if (!isFinite(t) || t < 0) return '0:00';
+      const m = Math.floor(t / 60);
+      const s = Math.floor(t % 60);
+      return m + ':' + String(s).padStart(2, '0');
+    }
+
+    function setPlayIcon(playing) {
+      musicIcon.classList.toggle('fa-play', !playing);
+      musicIcon.classList.toggle('fa-pause', playing);
+      musicToggle.setAttribute('aria-label', (playing ? 'Jeda' : 'Putar') + ' musik Memori Sekolah');
+    }
+
+    function setVolumeIcon() {
+      const v = audio.muted ? 0 : audio.volume;
+      const name = v === 0 ? 'fa-volume-xmark' : v < 0.5 ? 'fa-volume-low' : 'fa-volume-high';
+      musicVolumeIcon.className = 'fa-solid ' + name;
+      musicMute.setAttribute('aria-label', v === 0 ? 'Nyalakan suara' : 'Bisukan suara');
+    }
+
+    audio.addEventListener('play', () => {
+      setPlayIcon(true);
+      musicStatus.classList.remove('is-error');
+      musicStatus.textContent = 'Sedang diputar...';
+    });
+    audio.addEventListener('pause', () => {
+      setPlayIcon(false);
+      if (!musicStatus.classList.contains('is-error')) {
+        musicStatus.textContent = audio.currentTime > 0 ? 'Dijeda' : DEFAULT_STATUS;
+      }
+    });
+    audio.addEventListener('loadedmetadata', () => {
+      musicDuration.textContent = formatTime(audio.duration);
+      musicProgress.classList.toggle('is-static', !canSeek());
+    });
+    audio.addEventListener('timeupdate', () => {
+      const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      musicBar.style.width = pct + '%';
+      musicProgress.setAttribute('aria-valuenow', Math.round(pct));
+      musicCurrent.textContent = formatTime(audio.currentTime);
+      musicDuration.textContent = formatTime(audio.duration);
+    });
+    audio.addEventListener('ended', () => setPlayIcon(false));
+    // file audio belum ada / format tidak didukung
+    audio.addEventListener('error', () => {
+      musicStatus.classList.add('is-error');
+      musicStatus.textContent = 'File audio tidak bisa dimuat — cek folder audio/';
+      musicToggle.disabled = true;
+      setPlayIcon(false);
+    });
+
+    musicToggle.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      } else {
+        audio.pause();
+      }
+    });
+
+    // server tanpa dukungan HTTP Range membuat audio tidak bisa di-seek
+    function canSeek() {
+      return !!audio.duration && audio.seekable.length > 0 && audio.seekable.end(0) > 1;
+    }
+
+    function seekTo(clientX) {
+      if (!canSeek()) return;
+      const rect = musicProgress.getBoundingClientRect();
+      const ratio = Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1);
+      audio.currentTime = ratio * audio.duration;
+    }
+    musicProgress.addEventListener('pointerdown', e => seekTo(e.clientX));
+    musicProgress.addEventListener('keydown', e => {
+      if (!canSeek()) return;
+      if (e.key === 'ArrowRight') audio.currentTime = Math.min(audio.currentTime + 5, audio.duration);
+      if (e.key === 'ArrowLeft') audio.currentTime = Math.max(audio.currentTime - 5, 0);
+    });
+
+    musicVolume.addEventListener('input', () => {
+      audio.volume = parseFloat(musicVolume.value);
+      audio.muted = false;
+      setVolumeIcon();
+    });
+    musicMute.addEventListener('click', () => {
+      audio.muted = !audio.muted;
+      setVolumeIcon();
+    });
+    let statusTimer;
+    // pesan singkat di baris status (otomatis kembali seperti semula)
+    function flashStatus(message) {
+      if (musicStatus.classList.contains('is-error')) return;
+      clearTimeout(statusTimer);
+      musicStatus.textContent = message;
+      statusTimer = setTimeout(() => {
+        if (musicStatus.classList.contains('is-error')) return;
+        musicStatus.textContent = audio.paused ? DEFAULT_STATUS : 'Sedang diputar...';
+      }, 2500);
+    }
+
+    musicLoop.addEventListener('click', () => {
+      audio.loop = !audio.loop;
+      musicLoop.classList.toggle('is-on', audio.loop);
+      musicLoop.setAttribute('aria-pressed', String(audio.loop));
+      musicLoop.setAttribute('aria-label', audio.loop ? 'Hentikan pengulangan lagu' : 'Ulangi lagu terus-menerus');
+      musicLoop.setAttribute('title', audio.loop ? 'Matikan pengulangan' : 'Ulangi lagu');
+      flashStatus(audio.loop ? 'Lagu diulang terus-menerus' : 'Pengulangan dimatikan');
+    });
+    setVolumeIcon();
+
+    function playMusic() {
+      if (audio.error) return;
+      audio.play().catch(() => {
+        setPlayIcon(false);
+        musicStatus.classList.remove('is-error');
+        musicStatus.textContent = 'Ketuk tombol play untuk memutar';
+      });
+    }
+
     function initGallery() {
       if (galleryReady) {
         thumbSwiper.update();
@@ -168,6 +331,7 @@
       homeSection.style.display = 'none';
       albumSection.classList.remove('hidden');
       initGallery();
+      playMusic();
       albumSection.scrollIntoView({ behavior: 'smooth' });
     }
 

@@ -170,7 +170,160 @@ button:hover {
   font-size: 15px;
 }
 
-/* footer position */
+/* ===== player musik memori sekolah ===== */
+.music-player {
+  position: sticky;
+  top: 8px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 16px 0 4px;
+  padding: 10px 14px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+.music-toggle {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #4CAF50;
+  color: #fff;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.25s ease;
+}
+.music-toggle:hover {
+  transform: scale(1.06);
+  background: #45a049;
+}
+.music-toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.music-body {
+  flex: 1;
+  min-width: 0;
+}
+.music-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.music-status {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: #8a8a8a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.music-status.is-error {
+  color: #d64545;
+}
+.music-progress {
+  position: relative;
+  height: 6px;
+  margin-top: 7px;
+  background: #e4e4e4;
+  border-radius: 999px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.music-progress-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  background: #4CAF50;
+  border-radius: inherit;
+}
+.music-progress.is-static {
+  cursor: default;
+}
+.music-times {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 11px;
+  color: #8a8a8a;
+}
+.music-volume {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.music-mute {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #555;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.music-mute:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+.music-volume input[type="range"] {
+  width: 90px;
+  accent-color: #4CAF50;
+  cursor: pointer;
+}
+.music-loop {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background: #fff;
+  color: #9a9a9a;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.music-loop:hover {
+  background: #f2f2f2;
+  color: #666;
+  border-color: #c8c8c8;
+}
+/* spesifisitas sengaja dibuat > button:hover (0,1,1) supaya state tidak tertimpa */
+.music-loop.is-on {
+  color: #fff;
+  border-color: #4CAF50;
+  background: #4CAF50;
+}
+.music-loop.is-on:hover {
+  background: #45a049;
+  border-color: #45a049;
+  color: #fff;
+}
+
 .footer{
   position: absolute;
   z-index: 999;
@@ -179,6 +332,19 @@ button:hover {
 /* media queries */
 /* layar kecil / mobile */
 @media (max-width: 640px) {
+  .music-player {
+    gap: 10px;
+    padding: 9px 10px;
+    top: 4px;
+  }
+  .music-toggle {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+  .music-volume input[type="range"] {
+    display: none;
+  }
   .album-section {
     padding: 16px 12px calc(76px + env(safe-area-inset-bottom, 0px));
   }
